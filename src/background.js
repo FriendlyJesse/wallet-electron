@@ -16,7 +16,8 @@ protocol.registerSchemesAsPrivileged([{scheme: 'app', privileges: { secure: true
 
 function createWindow () {
   // Create the browser window.
-  win = new BrowserWindow({ width: 800, height: 600, webPreferences: {
+  win = new BrowserWindow({ width: 1400, height: 800, webPreferences: {
+    webSecurity: false, // 取消跨域
     nodeIntegration: true
   } })
 
@@ -33,6 +34,31 @@ function createWindow () {
   win.on('closed', () => {
     win = null
   })
+
+  createMenu() // 取消菜单栏
+}
+
+// 设置菜单栏
+function createMenu() {
+    // darwin表示macOS，针对macOS的设置
+    if (process.platform === 'darwin') {
+        const template = [
+        {
+            label: 'App Demo',
+            submenu: [
+                {
+                    role: 'about'
+                },
+                {
+                    role: 'quit'
+                }]
+        }]
+        let menu = Menu.buildFromTemplate(template)
+        Menu.setApplicationMenu(menu)
+    } else {
+        // windows及linux系统
+        Menu.setApplicationMenu(null)
+    }
 }
 
 // Quit when all windows are closed.
