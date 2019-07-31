@@ -1,29 +1,52 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
-    <router-view/>
+    <el-menu :default-active="$route.path" mode="horizontal" router>
+      <el-menu-item v-for="(item, key) in routers" :key="key" :index="item.path">{{item.name}}</el-menu-item>
+    </el-menu>
+    <router-view />
   </div>
 </template>
 
-<style lang="scss">
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
-#nav {
-  padding: 30px;
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-    &.router-link-exact-active {
-      color: #42b983;
+<script>
+
+export default {
+  name: 'app',
+  data() {
+    return {
+      
+    }
+  },
+  computed: {
+    routers() {
+      return [
+        {
+          path: '/',
+          name: this.$t('home')
+        },
+        {
+          path: '/transfer',
+          name: this.$t('transfer')
+        },
+        {
+          path: '/contact',
+          name: this.$t('contact')
+        },
+        {
+          path: '/setting',
+          name: this.$t('setting')
+        }
+      ]
     }
   }
+}
+</script>
+
+<style>
+body {
+  margin: 0;
+  background: #ececec;
+}
+.el-menu {
+  border-bottom: none !important;
 }
 </style>
