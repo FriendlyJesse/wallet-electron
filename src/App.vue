@@ -45,6 +45,7 @@ export default {
 body {
   margin: 0;
   background: #ececec;
+  -webkit-app-region:drag;
 }
 .el-menu {
   border-bottom: none !important;
